@@ -1,0 +1,17 @@
+---
+# Setup OpenVZWebPanelDaemon on openvz hosts
+
+  - name: Install ruby package
+    yum: name=ruby state=present
+
+  - name: Copy to /etc/init.d/owpd
+    copy: src=owpd dest=/etc/init.d/owpd mode=0755
+
+  - name: Copy to /opt/ovz-web-panel
+    copy: src=ovz-web-panel dest=/opt/ mode="g-rwx,o-rwx"
+    notify:
+    - restart owpd
+
+  - name: Ensure owpd is running (and enable it at boot)
+    service: name=owpd state=started enabled=yes
+

@@ -1,0 +1,5 @@
+---
+# Setup OpenVZWebPanelDaemon on openvz hosts
+
+    - name: restart owpd
+      service: name=owpd state=restarted

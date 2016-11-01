@@ -1,0 +1,70 @@
+#! /bin/sh
+# /etc/init.d/owpd
+#
+# chkconfig: 2345 85 15 
+# description: OWP Daemon
+# processname: OWP Daemon
+# version: 1.0
+ 
+#
+# Install the service with chkconfig --add owpd
+# 
+ 
+# Define where owp is installed. 
+# The trailing slash is required ( Example : /my/path/bin/ )
+OWP_DIRECTORY=/opt/ovz-web-panel/utils/hw-daemon/
+ 
+# Source function library.
+. /etc/init.d/functions
+ 
+DAEMON="${OWP_DIRECTORY}hw-daemon.rb"
+ 
+start() {
+        cd $OWP_DIRECTORY;
+        ruby $DAEMON start
+        RETVAL=$?
+        echo
+        [ $RETVAL = 0 ] && touch /var/lock/subsys/owpd
+        return $RETVAL
+}
+ 
+stop() {
+        echo "Stopping OVZ Web Panel Daemon..."
+        ruby $DAEMON stop
+        RETVAL=$?
+        echo
+        [ $RETVAL = 0 ] && rm -f /var/lock/subsys/owpd
+	return $RETVAL
+}
+
+status() {
+	OUT=`pgrep -fl hw-daemon.rb`
+        RETVAL=$?
+	if [ $RETVAL = 0 ];
+	then echo "owpd is runing: $OUT"
+        else echo "owpd is stopped..."
+	fi
+	return $RETVAL
+}
+
+ 
+case "$1" in
+    start)
+	status || start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    status)
+	status
+	;;
+    *)
+        echo "Usage:  {start|stop|restart|status}"
+        exit 1
+        ;;
+esac
+exit $RETVAL

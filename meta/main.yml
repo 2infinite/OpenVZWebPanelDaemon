@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: 2infinite
+  description: An Ansible role that install OpenVZ WebPanel Daemon on openvz hosts
+  license: BSD
+  min_ansible_version: 1.9
+  platforms:
+  - name: EL
+    versions:
+    - all
+  galaxy_tags:
+    - openvz
+    - webpanel daemon
+    - monitoring
+
