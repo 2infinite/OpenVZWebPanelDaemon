@@ -1,7 +1,6 @@
 # Ansible Role: OpenVZWebPanelDaemon
 
-An Ansible role that install OpenVZ WebPanel Daemon on openvz hosts
-[OpenVZ Web Panel](http://code.google.com/p/ovz-web-panel/) 
+An Ansible role that install [OpenVZ Web Panel](http://code.google.com/p/ovz-web-panel/) Daemon on openvz hosts
 
 ## Example Playbook
 ```sh
